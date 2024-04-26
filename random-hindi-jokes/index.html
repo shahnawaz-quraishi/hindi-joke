@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hindi Random Jokes</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #222831;
+        }
+
+        .content{
+            width: 600px;
+            text-align: center;
+            background-color: #393E46;
+            padding: 25px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+
+        h1{
+            color: #00ADB5;
+        }
+
+        p{
+            margin: 20px;
+            word-spacing: 5px;
+            line-height: 45px;
+            color: #EEEEEE;
+            font-size: 25px;
+        }
+
+        h3{
+            margin: 10px 0;
+            color: rgb(12, 12, 104);
+        }
+
+        button{
+            padding: 10px;
+            background-color: #00ADB5;
+            color: #393E46;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>Welcome to hindi Joke</h1>
+            <p class="api-body"> </p>
+            <h3 class="type"></h3>
+            <button class="btn">Get another joke</button>
+        </div>
+    </div>
+
+    <script>
+        const apiBody = document.querySelector('.api-body');
+        const apiType = document.querySelector('.type');
+        const apiUrl = "https://hindi-jokes-api.onrender.com/jokes?api_key=5a73f12ca5923ff73ae01a988090";
+
+        const fetchData = async () =>{
+
+            try{
+
+                apiBody.innerHTML = "Loading..."
+           
+                const res = await fetch(apiUrl)
+            
+                const data = await res.json();
+
+                console.log(data);
+
+                apiBody.innerHTML = data.jokeContent;
+
+            }catch(err){
+                apiBody.innerHTML = "something wrong please try again."
+                console.log(err);
+            }
+
+             
+        }
+
+        fetchData();
+     
+
+       
+
+        const btn = document.querySelector('.btn');
+
+        btn.addEventListener('click', fetchData);
+
+
+    </script>
+</body>
+</html>
